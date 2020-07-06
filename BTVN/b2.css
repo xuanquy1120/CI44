@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    display: flex;
+    height: 1em;
+}
+.item1 {
+    background-color: aqua;
+    flex: 1;
+}
+.item2 {
+    background-color: whitesmoke;
+    flex: 8;
+
+}
+.item3{
+    background-color: violet;
+    flex: 1;
+}

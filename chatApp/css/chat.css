@@ -1,0 +1,75 @@
+.chat-container{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+.chat-container .chat-header{
+    background-color: #027bfd;
+    color:#ffff;
+    text-align: center ;
+    height: 64px;
+    font-size:24px;
+    line-height: 64px;
+}
+.chat-container .main{
+    height: calc(100% - 64px);
+}
+.conversation-title{
+    height: 64px;
+    line-height: 64px;
+    color: #333333;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 1px solid #ddbbdd;
+}
+.chat-container .conversation-detail{
+    height: 100%;
+    display: flex;
+    flex-direction:column ;
+}
+.chat-container .conversation-detail .list-message{
+    flex-grow: 1;
+}
+#sendMessageForm{
+    height: 64px;
+    line-height: 64px;
+    border-top: 1px solid #ddbbdd;
+    display: flex;    
+}
+#sendMessageForm input{
+    border: none;
+    flex-grow: 1;
+    padding-left: 20px;
+    outline: 0;
+}
+#sendMessageForm button{
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #027bfd;
+}
+.chat-container .list-message{
+    padding: 10px;
+    overflow-y: auto;
+}
+.chat-container .list-message .content{
+    border-radius: 10px;
+    max-width: 40%;
+    background: #dbdbdb;
+    padding: 10px;
+    word-break: break-word;
+    width: max-content;
+    
+}
+.chat-container .message.their .content{
+    background-color: #dbdbdb;
+}
+.chat-container .message.mine .content{
+    background-color: #027bfd;
+    color: #fff;
+   
+}
+.chat-container .message.mine{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}

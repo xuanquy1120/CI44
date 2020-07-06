@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+}
+input[type=password]{
+    color: aquamarine;
+    font-size: 20px;
+}
+ul li{
+    color: red;
+}
+ul :hover{
+    color: white;
+    background-color: cadetblue;
+}
+/* don vi: rem la don vi theo size cua ca trang the (body) (vd: body 14px=1 rem) 
+          : em la don vi theo size cha cua no
+    */

@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    display: flex;
+}
+.item{
+    background-color: aqua;
+    width: 25%;
+    height: 100vh;
+}
