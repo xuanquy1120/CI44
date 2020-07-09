@@ -1,7 +1,8 @@
 const model = {}
 model.currentUser = undefined
 model.collectionName='conversations'
-model.currentConversations = undefined
+model.currentconversation = undefined
+model.conversations = undefined
 
 model.register = (firstName, lastName, email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
@@ -33,13 +34,15 @@ model.login = (email,password)=>{
     console.log(err)
   })
 }
-model.loadConversations=()=>{
+model.loadconversations=()=>{
   firebase.firestore().collection(model.collectionName).where('users','array-contains', model.currentUser.email).get().then(res=>{
     const data = utils.getDataFromDocs(res.docs)
+    model.conversations = data
     if(data.length >0){
-      model.currentConversations = data[0]
-      view.showCurrentConversations()
+      model.currentconversation = data[0]
+      view.showCurrentconversation()
     }
+    view.showConversation()
     // console.log(data)
   })
 }
@@ -47,9 +50,9 @@ model.addMessage = (message) =>{
   const dataToUpdate = {
     messages:firebase.firestore.FieldValue.arrayUnion(message),
   }
-  firebase.firestore().collection(model.collectionName).doc(model.currentConversations.id).update(dataToUpdate)
+  firebase.firestore().collection(model.collectionName).doc(model.currentconversation.id).update(dataToUpdate)
 }
-model.listenConversationsChange = () =>{
+model.listenconversationsChange = () =>{
   let isFistRun = false
   firebase.firestore().collection(model.collectionName).where('users','array-contains', model.currentUser.email).onSnapshot((res)=>{
    const docChanges = res.docChanges()
@@ -63,9 +66,39 @@ model.listenConversationsChange = () =>{
      const type = oneChange.type
      const oneChangeData = utils.getDataFromDoc(oneChange.doc)
      console.log(oneChangeData)
-     if(oneChangeData.id=model.currentConversations.id){
-       view.addMessage(oneChangeData.messages[oneChangeData.messages.length -1])
+     if(type === 'modified')
+     {
+      if(oneChangeData.id=model.currentconversation.id){
+        model.currentconversation = oneChangeData
+        view.addMessage(oneChangeData.messages[oneChangeData.messages.length -1])
+      }
+      for(let i = 0; i<model.conversations.length;i++){
+        const element = model.conversations[i]
+        if(element.id === oneChangeData.id){
+          model.conversations[i]=oneChangeData
+        }
+      }
      }
+     else if(type==='added'){
+      model.conversations.push(oneChangeData)
+      view.addConversation(oneChangeData)
+    }
    }
   })
+}
+model.changeCurrentConversation = (conversationId) =>{
+  // for(conversations of model.conversations){
+  //   if(conversations.id===conversationsId){
+  //     model.currentconversation=conversations
+  //   }
+  // }
+  model.currentConversation = model.conversations
+  .filter(item => item.id === conversationId)[0]
+  console.log(model.currentConversation)
+  view.showCurrentConversation()
+}
+model.createConversation = (conversations)=>{
+  firebase.firestore().collection(model.collectionName).add(conversations).then(res=>{
+  })
+  view.backToChatScreen()
 }

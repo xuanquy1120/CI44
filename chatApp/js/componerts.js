@@ -59,21 +59,50 @@ components.loginScreen = `
 </div>
 `
 components.chatScreen = `
+<div class="header">
+  MindX chat
+</div>
 <div class="chat-container">
-            <div class="chat-header">
-                Mindx chat
-            </div>
+<div class="aside-left">
+  <div class="new-conversations">
+    <button class="btn" id="new-conversation">new-conversation</button>
+  </div>
+  <div class="list-conversations">
+  
+  </div>
+</div>
+<div class="main">
+  <div class="conversation-detail">
+    <div class="conversation-title">First conversation</div>
+    <div class="list-message">
+    </div>
+    <form id="sendMessageForm">
+      <input class="input" autocomplete="off" type="text" name="message" placeholder="Type a message">
+      <button class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+    </form>
+  </div>
+</div>
+</div>
+`
+components.createConversationScreen=`
+<div class="create-connversation-wrapper">
+            <div class="header">MindX chat</div>
             <div class="main">
-                <div class="conversation-detail">
-                    <div class="conversation-title">First conversation</div>
-                    <div class="list-message">
-                      
+                <h3>Create a new conversation</h3>
+                <form id="create-conversation-form">
+                    <div class="input-wrapper">
+                        <input type="text" name="title" placeholder="Conversation name">
+                        <div class="error" id="conversation-name-error"></div>
                     </div>
-                    <form id="sendMessageForm">
-                        <input class="input" autocomplete="off" type="text" name="message">
-                        <button class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                    </from>
-                </div>
+                    <div class="input-wrapper">
+                        <input type="text" name="email" placeholder="Friend email">
+                        <div class="error" id="conversation-email-error"></div>
+                    </div>
+                    <div class="button-wrapper">
+                        <button class="btn" type="submit">Save</button>
+                        <button type="button" id="back-to-chat">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
 `
