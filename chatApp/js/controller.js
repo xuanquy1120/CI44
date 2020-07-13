@@ -60,3 +60,11 @@ controller.createConversation = ({title,friendEmail})=>{
     })
   }
 }
+controller.addUser=(email)=>{
+  if(email===''){
+    view.setErrorMessage('add-user-email-error','Please input email')
+  }else{
+    view.setErrorMessage('add-user-email-error','')
+    model.addUser(email)
+  }
+}

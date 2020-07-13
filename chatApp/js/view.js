@@ -58,6 +58,12 @@ view.setActiveScreen = (screenName) => {
       })
       model.loadconversations()
       model.listenconversationsChange()
+      const addUserForm = document.querySelector('#add-user-form')
+      addUserForm.addEventListener('submit',(e)=>{
+        e.preventDefault()
+        controller.addUser(addUserForm.email.value)
+        addUserForm.email.value=''
+      })
       break;
       case'createConversationScreen':
       document.getElementById('app').innerHTML=components.createConversationScreen
@@ -99,7 +105,7 @@ view.backToChatScreen=()=>{
     view.setActiveScreen('createConversationScreen')
   })
   view.showConversation()
-  view.showCurrentconversation()
+  view.showCurrentConversation()
   })
 }
 view.setErrorMessage = (elementId, message) => {
@@ -125,10 +131,25 @@ view.addMessage = (message)=>{
   document.querySelector('.list-message').appendChild(messageWrapper)
   listMessage.scrollTop = listMessage.scrollHeight
 }
-view.showCurrentconversation = ()=>{
-  for(let oneMessage of model.currentconversation.messages){
+view.showCurrentConversation = ()=>{
+  document.querySelector('.conversation-detail>.conversation-title').innerHTML=''
+  for(let oneMessage of model.currentConversation.messages){
     view.addMessage(oneMessage)
   }
+  document.querySelector('.conversation-detail>.conversation-title').innerHTML= model.currentConversation.title
+  view.showCurrentConversationUser()
+}
+
+view.showCurrentConversationUser=()=>{
+  document.querySelector('.list-users').innerHTML=''
+  for(users of model.currentConversation.users){
+    view.addUser(users)
+  }
+}
+view.addUser=(users)=>{
+  const userWrapper=document.createElement('div')
+  userWrapper.innerHTML=users
+  document.querySelector('.list-users').appendChild(userWrapper)
 }
 view.showConversation=()=>{
   for(oneConversation of model.conversations){
@@ -138,7 +159,7 @@ view.showConversation=()=>{
 view.addConversation = (conversation) =>{
   const conversationWrapper = document.createElement('div')
   conversationWrapper.classList.add('conversation')
-  if(conversation.id === model.currentconversation.id){
+  if(conversation.id === model.currentConversation.id){
     conversationWrapper.classList.add('current')
   }
   conversationWrapper.innerHTML = `    
@@ -148,7 +169,7 @@ view.addConversation = (conversation) =>{
   conversationWrapper.addEventListener('click', () => {
     document.querySelector('.current').classList.remove('current')
     conversationWrapper.classList.add('current')
-    model.changeCurrentConversation(conversation.id)
+    model.changecurrentConversation(conversation.id)
   })
   document.querySelector('.list-conversations').appendChild(conversationWrapper)
 }

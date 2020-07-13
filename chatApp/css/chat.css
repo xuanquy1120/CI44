@@ -89,3 +89,11 @@
     line-height: 64px;
     text-align: center;
   }
+  .chat-container .aside-right{
+    width: 15%;
+    border-left: 1px solid #dbdbdb;
+    padding: 10px;
+  }
+.aside-right.list-users, .aside-right .input-wrapper{
+  margin-bottom: 10px;
+}

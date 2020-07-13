@@ -82,6 +82,19 @@ components.chatScreen = `
     </form>
   </div>
 </div>
+<div class="aside-right">
+            <div class="list-users">
+            </div>
+            <form id='add-user-form'>
+            <div class="input-wrapper">
+                <input type="text" name="email">
+                <div class="error" id="add-user-email-error"></div>
+            </div>
+            <div class="submit-btn">
+            <button type="submit" class="btn">Add</button>
+        </div>
+        </form>
+        </div>
 </div>
 `
 components.createConversationScreen=`
